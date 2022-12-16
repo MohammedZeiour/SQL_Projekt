@@ -14,8 +14,6 @@ Anschließend habe ich die zuvor erstellen Tabellen mit folgenden Daten befüllt
 ![starwarsdata 1](https://user-images.githubusercontent.com/115487717/208009541-a4ae6a7a-b4ec-44e4-9d32-d82ae25e46b7.png)
 
 
-
-
-Zuletzt habe ich sämtliche Abfragen mit Hilfe von SQL-Statements befüllt.
+Zuletzt habe ich sämtliche Abfragen mit Hilfe von SQL-Statements gelöst.
 
 
