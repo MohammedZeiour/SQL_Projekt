@@ -1,5 +1,8 @@
 import sqlalchemy
 
+
+#DATENBANKSCHEMA ERSTELLEN:
+
 DROP TABLE if EXISTS characters;
 DROP TABLE if EXISTS charactertype;
 DROP TABLE if EXISTS heroes;
@@ -20,6 +23,7 @@ CREATE TABLE film (eid int not null UNIQUE, cid varchar(20), PRIMARY KEY (eid, c
 CREATE TABLE friends (id int REFERENCES characters (cid) ON DELETE CASCADE, fid int REFERENCES characters (cid) ON DELETE CASCADE, PRIMARY KEY (id, fid));
 
 
+#Daten einfügen
 
 INSERT INTO charactertype 
 VALUES 
@@ -88,3 +92,63 @@ INSERT INTO appears VALUES
 (2001, 4),
 (2001, 5),
 (2001, 6);
+
+
+#Abfragen
+
+#Geben Sie Vornamen, Namen und TypeID für Luke Skywalker an:
+
+SELECT fname, lname, name
+FROM characters 
+LEFT JOIN charactertype
+ON characters.typeid = charactertype.ctid where cid = "1000";
+
+
+#In welchem Film spielt Leia Organa mit? Geben Sie die Codes an:
+
+SELECT film.cid
+FROM characters
+LEFT JOIN appears
+ON characters.cid = appears.cid
+LEFT JOIN film
+ON appears.eid= film.eid WHERE fname = "Leia";
+
+
+#Welche Charaktere spielen in dem Film 'NewHope' mit? Geben Sie Vor- und Nachnamen an.
+
+SELECT fname, lname 
+FROM film 
+LEFT JOIN appears
+ON appears.eid= film.eid
+LEFT JOIN characters 
+ON characters.cid = appears.cid WHERE film.cid = "NewHope";
+
+
+#Welchen Vor- und Nachname hat der Held in dem Film 'Jedi'?
+
+SELECT characters.fname, characters.lname
+FROM film 
+LEFT JOIN heroes 
+ON film.eid = heroes.eid
+LEFT JOIN characters 
+ON characters.cid = heroes.cid WHERE film.cid = "Jedi";
+
+
+#C3PO bekommt das ultimative KI-Update. Verändern Sie den Chraktertyp von C 3PO vom Androiden zum Menschen mit Hilfe einer SQL-Update-Anweisung.
+
+UPDATE characters SET typeid = "H" WHERE fname = "C";
+
+
+#C3PO bekommt das ultimative KI-Update. Fügen Sie ein neuen Eintrag ('HL', 'human-like') in die Tabelle charactertype ein. 
+#Verändern Sie den Chraktertyp von C 3PO vom Androiden zum menschenähnlichen Wesen mit Hilfe der Update-Operation. 
+
+INSERT INTO charactertype 
+VALUES ("HL", "human-like");
+UPDATE characters SET typeid = "HL" WHERE fname = "C";
+
+
+#Darth Vader geht in den verdienten Ruhestand. Löschen Sie Darth Vader aus den Charakteren. 
+
+DELETE FROM characters where fname = "Vader";
+
+
