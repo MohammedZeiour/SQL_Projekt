@@ -5,10 +5,9 @@ DROP TABLE if EXISTS charactertype;
 DROP TABLE if EXISTS heroes;
 DROP TABLE if EXISTS appears;
 DROP TABLE if EXISTS film;
-DROP TABLE if EXISTS starships;
 DROP TABLE if EXISTS friends;
 
-CREATE TABLE characters (cid int not null UNIQUE, fname varchar (50), lname varchar (50), typeid varchar(1) REFERENCES charactertype (ctid), spid int REFERENCES starships(spid) UNIQUE, PRIMARY KEY (cid));
+CREATE TABLE characters (cid int not null UNIQUE, fname varchar (50), lname varchar (50), typeid varchar(1) REFERENCES charactertype (ctid), PRIMARY KEY (cid));
 
 CREATE TABLE charactertype (ctid varchar (1) not null UNIQUE, name varchar(20), PRIMARY KEY (ctid));
 
@@ -17,7 +16,5 @@ CREATE TABLE heroes (eid int REFERENCES film (eid) ON DELETE CASCADE, cid int RE
 CREATE TABLE appears (cid int REFERENCES characters (cid) ON DELETE CASCADE, eid int REFERENCES film (eid) ON DELETE CASCADE, PRIMARY KEY (cid, eid));
 
 CREATE TABLE film (eid int not null UNIQUE, cid int, PRIMARY KEY (eid, cid));
-
-CREATE TABLE starships (spid int not null UNIQUE, name varchar (50), PRIMARY KEY (spid));
 
 CREATE TABLE friends (id int REFERENCES characters (cid) ON DELETE CASCADE, fid int REFERENCES characters (cid) ON DELETE CASCADE, PRIMARY KEY (id, fid));
