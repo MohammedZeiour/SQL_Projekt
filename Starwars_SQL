@@ -1,3 +1,4 @@
+import sqlalchemy
 
 DROP TABLE if EXISTS characters;
 DROP TABLE if EXISTS charactertype;
