@@ -15,7 +15,7 @@ CREATE TABLE heroes (eid int REFERENCES film (eid) ON DELETE CASCADE, cid int RE
 
 CREATE TABLE appears (cid int REFERENCES characters (cid) ON DELETE CASCADE, eid int REFERENCES film (eid) ON DELETE CASCADE, PRIMARY KEY (cid, eid));
 
-CREATE TABLE film (eid int not null UNIQUE, cid int, PRIMARY KEY (eid, cid));
+CREATE TABLE film (eid int not null UNIQUE, cid varchar(20), PRIMARY KEY (eid, cid));
 
 CREATE TABLE friends (id int REFERENCES characters (cid) ON DELETE CASCADE, fid int REFERENCES characters (cid) ON DELETE CASCADE, PRIMARY KEY (id, fid));
 
@@ -28,16 +28,16 @@ VALUES
 
 INSERT INTO characters 
 VALUES 
-(1000, 'Luke', 'Skywalker', 'H',1),
-(1001, 'Darth', 'Vader', 'H' ,2),
-(1002, 'Han', 'Solo', 'H', 3),
-(1003, 'Leia', 'Organa', 'H',NULL),
-(1004, 'Wilhuff', 'Tarkin', 'H',NULL),
-(2000, 'C', '3PO', 'D', NULL),
-(2001, 'R2', 'D2', 'D', NULL);
+(1000, 'Luke', 'Skywalker', 'H'),
+(1001, 'Darth', 'Vader', 'H'),
+(1002, 'Han', 'Solo', 'H'),
+(1003, 'Leia', 'Organa', 'H'),
+(1004, 'Wilhuff', 'Tarkin', 'H'),
+(2000, 'C', '3PO', 'D'),
+(2001, 'R2', 'D2', 'D');
 
 INSERT INTO film VALUES 
-(4, NULL),
+(4, 'NewHope'),
 (5, 'Empire'),
 (6, 'Jedi');
 
@@ -47,7 +47,7 @@ INSERT INTO heroes VALUES
 (6, 2001);
 
 INSERT INTO friends VALUES 
-(1000, NULL),
+(1000, 1002),
 (1000, 1003),
 (1000, 2000),
 (1000, 2001),
@@ -88,4 +88,3 @@ INSERT INTO appears VALUES
 (2001, 4),
 (2001, 5),
 (2001, 6);
-
